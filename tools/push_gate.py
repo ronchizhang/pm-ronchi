@@ -23,6 +23,7 @@
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -37,10 +38,14 @@ TERSE_OK = {"发", "推", "好", "行", "可以", "ok", "OK"}
 
 
 def is_confirm(quote):
+    """一句话里有确认词就算；或者整句拆开全是肯定词（「好，发」「发」「ok」）。"""
     q = (quote or "").strip()
-    if q in TERSE_OK:
+    if not q:
+        return False
+    if any(w in q for w in CONFIRM_WORDS):
         return True
-    return any(w in q for w in CONFIRM_WORDS)
+    tokens = [t for t in re.split(r"[^\w]+", q) if t]
+    return bool(tokens) and all(t in TERSE_OK for t in tokens)
 
 
 def run(cmd):
@@ -180,6 +185,49 @@ def push(dry_run=False, force=False):
     return rc
 
 
+def tag(name, at=None, message=None, dry_run=False):
+    """给某个提交打 tag 并推上去。用同一个批准，不另开一条路。"""
+    st = load_state()
+    if not st:
+        print("没有批准记录。先跑 status，再让用户说一句「发」。", file=sys.stderr)
+        return 1
+
+    problems = []
+    if st.get("head") != head():
+        problems.append("HEAD 变了：批准的是 %s" % st.get("head", "")[:8])
+    if st.get("remote") != remote():
+        problems.append("远端变了")
+    if dirty():
+        problems.append("工作区不干净")
+    rc, sha, _ = run(["git", "rev-parse", "--verify", "%s^{commit}" % (at or "HEAD")])
+    if rc != 0:
+        problems.append("找不到要打 tag 的提交：%s" % (at or "HEAD"))
+    rc2, _, _ = run(["git", "rev-parse", "--verify", "refs/tags/%s" % name])
+    if rc2 == 0:
+        problems.append("本地已经有这个 tag：%s" % name)
+    if problems:
+        print("拒绝打 tag：", file=sys.stderr)
+        for p in problems:
+            print("  ✗ %s" % p, file=sys.stderr)
+        return 1
+
+    print("即将给 %s 打 tag %s，并推到 origin" % (sha[:8], name))
+    print("批准原话：%s" % st.get("quote"))
+    if dry_run:
+        print("（-n 只校验，没有真打真推）")
+        return 0
+
+    rc, out, err = run(["git", "tag", "-a", name, sha, "-m", message or name])
+    if rc != 0:
+        print(err, file=sys.stderr)
+        return rc
+    rc, out, err = run(["git", "push", "origin", "refs/tags/%s" % name])
+    print(out or err)
+    if rc == 0:
+        print("tag 推上去了。Release 还要你在网页点一下发布，我没有那个权限。")
+    return rc
+
+
 def main():
     ap = argparse.ArgumentParser(description="推送闸门")
     sub = ap.add_subparsers(dest="cmd")
@@ -194,11 +242,19 @@ def main():
     p.add_argument("-n", "--dry-run", action="store_true")
     p.add_argument("--force-with-lease", dest="force", action="store_true")
 
+    t = sub.add_parser("tag", help="打 tag 并推送（同一套批准）")
+    t.add_argument("name")
+    t.add_argument("--at", default=None, help="给哪个提交打，默认 HEAD")
+    t.add_argument("--message", default=None)
+    t.add_argument("-n", "--dry-run", action="store_true")
+
     args = ap.parse_args()
     if args.cmd == "approve":
         return approve(args.quote, args.force)
     if args.cmd == "push":
         return push(args.dry_run, args.force)
+    if args.cmd == "tag":
+        return tag(args.name, args.at, args.message, args.dry_run)
     return status()
 
 
