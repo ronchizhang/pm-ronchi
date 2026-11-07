@@ -68,9 +68,9 @@ https://github.com/ronchizhang/pm-ronchi
 它会自己放进 `~/.workbuddy/skills/`（Claude Code 是 `~/.claude/skills/`），目录名用 `pm-ronchi`。
 装完开个新对话，直接说需求：
 
-> 用「产品Ronchi」帮我看看这个需求值不值得做
-> 评审一下这份 PRD
-> 这份 docx 你看下交互
+> - 用「产品Ronchi」帮我看看这个需求值不值得做
+> - 评审一下这份 PRD
+> - 这份 docx 你看下交互
 
 评人要明说「这次评人」，它默认评物。
 
