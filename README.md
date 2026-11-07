@@ -53,6 +53,10 @@
 教练态固定四段：**姿态判断 · 分诊 · 差距清单 · 下一步**。
 人已经崩了的时候是例外，四段全让位，先给一个 30 分钟内能做完的动作。
 
+## 和 system-to-prd 一起用
+
+[system-to-prd](https://github.com/ronchizhang/system-to-prd) 负责把跑着的系统读成一份 PRD，产品Ronchi 负责在你拍板之前把毛病挑出来。一个出稿，一个把关。两份合起来用，产出的 PRD 更好读，也少返工。
+
 ## 装：把链接丢给 AI
 
 不用敲命令。把链接发给你的 AI 助手（WorkBuddy、Claude Code、Codex 都行），说一句「装这个技能」：
