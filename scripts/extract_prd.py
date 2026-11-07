@@ -567,7 +567,17 @@ def collect_targets(target, outdir=None):
     return picked
 
 
+def _force_utf8_stdout():
+    """Windows 控制台默认 cp936 / cp1252，打印 ✅ 会直接抛 UnicodeEncodeError。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
 def main():
+    _force_utf8_stdout()
     ap = argparse.ArgumentParser(
         description="把 PRD 拆成文字 + 图 + 图文对应关系（纯标准库，无第三方依赖）")
     ap.add_argument("target", help="PRD 文件或目录")

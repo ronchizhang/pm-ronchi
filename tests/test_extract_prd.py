@@ -50,6 +50,7 @@ class TestExtractPrd(unittest.TestCase):
         return subprocess.run(
             [sys.executable, SCRIPT] + list(args),
             capture_output=True, text=True,
+            encoding="utf-8", errors="replace",
         )
 
     def test_help_exits_zero(self):

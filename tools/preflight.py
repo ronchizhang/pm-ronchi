@@ -30,7 +30,10 @@ SKIP_DIRS = {".git", "__pycache__", "node_modules", "docs/shots"}
 # ---------- 基础工具 ----------
 
 def run(cmd, cwd=ROOT):
-    p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+    # Windows 上 text=True 会按本地编码（cp936 / cp1252）解码，
+    # 子进程输出的中文是 UTF-8，直接抛 UnicodeDecodeError。固定成 utf-8 才跨平台。
+    p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
     return p.returncode, p.stdout, p.stderr
 
 
