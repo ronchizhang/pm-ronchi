@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.env
+*.token
+
+# 取材脚本的默认输出目录，属于使用者自己的项目
+prd-extract/
+out/

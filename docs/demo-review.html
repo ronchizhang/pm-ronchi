@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>评审报告示例 · 产品Ronchi</title>
+<style>
+  :root{
+    --paper:#FCFBF8; --ink:#1C2530; --muted:#6E6A60; --line:#E6E1D5;
+    --accent:#B23A2F; --soft:#F4F1E9; --ok:#2F6B4F; --warn:#B07B21;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:#EFEBE1; color:var(--ink);
+    font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,sans-serif;
+    font-size:15px; line-height:1.8; -webkit-font-smoothing:antialiased;
+  }
+  .sheet{
+    max-width:940px; margin:40px auto 60px; background:var(--paper);
+    padding:64px 72px 56px; position:relative;
+    box-shadow:0 24px 60px rgba(28,37,48,.14);
+  }
+  .demo-tag{
+    position:absolute; top:26px; right:32px; font-size:12px; letter-spacing:2px;
+    color:var(--accent); border:1px solid rgba(178,58,47,.4); padding:5px 12px; border-radius:2px;
+  }
+  .eyebrow{font-size:12px; letter-spacing:4px; color:var(--muted); margin-bottom:14px}
+  h1{font-size:31px; line-height:1.35; margin:0 0 10px; letter-spacing:-.5px}
+  .meta{color:var(--muted); font-size:13px; border-bottom:1px solid var(--line); padding-bottom:22px}
+  .meta span{margin-right:22px}
+
+  .verdict{
+    margin:30px 0 6px; padding:24px 28px 20px; background:#fff;
+    border-left:4px solid var(--accent); border-top:1px solid var(--line);
+    border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .verdict .k{font-size:12px; letter-spacing:3px; color:var(--muted)}
+  .verdict .v{font-size:28px; font-weight:700; color:var(--accent); margin:4px 0 2px}
+  .verdict .sub{margin:0 0 16px; color:#3C4655; font-size:15px}
+  .verdict ol{margin:0; padding-left:0; list-style:none; counter-reset:j}
+  .verdict ol li{position:relative; padding-left:30px; margin-bottom:10px; font-size:14.5px; color:#2B3542}
+  .verdict ol li::before{
+    counter-increment:j; content:counter(j,decimal-leading-zero);
+    position:absolute; left:0; top:2px; font-size:11px; letter-spacing:1px; color:var(--accent);
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .verdict ol li b{font-weight:600; color:var(--ink)}
+
+  h2{font-size:14px; letter-spacing:3px; color:var(--muted); font-weight:600; margin:44px 0 16px}
+  h2::before{content:""; display:inline-block; width:18px; height:2px; background:var(--accent); vertical-align:4px; margin-right:10px}
+
+  table{width:100%; border-collapse:collapse; font-size:14.5px}
+  table.dispatch{table-layout:fixed}
+  table.dispatch td:last-child,table.dispatch th:last-child{white-space:nowrap}
+  th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{font-size:12px; letter-spacing:1px; color:var(--muted); font-weight:600; background:var(--soft)}
+  td.q{width:120px; font-weight:600; white-space:nowrap}
+  td.now{color:var(--muted); width:110px}
+  .mark{font-weight:700}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .no{color:var(--accent)}
+  .gap{color:var(--accent); font-size:13px; margin-top:10px}
+
+  .basis{border-top:1px solid var(--line)}
+  .basis .row{display:grid; grid-template-columns:108px 1fr; gap:16px; padding:13px 0; border-bottom:1px solid var(--line)}
+  .basis .k{font-size:12px; color:var(--muted); letter-spacing:1px; padding-top:3px}
+  .basis .v{font-size:14.5px}
+  .basis .v b{font-weight:600; color:var(--ink)}
+  .basis .v em{font-style:normal; color:var(--muted); font-size:13.5px}
+
+  ol.ask{margin:0; padding-left:22px}
+  ol.ask li{margin-bottom:10px}
+  ol.ask li b{font-weight:600}
+
+  .note{background:var(--soft); padding:18px 22px; font-size:13.5px; color:var(--muted); margin-top:16px}
+  .note b{color:var(--ink)}
+  footer{margin-top:46px; padding-top:18px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted)}
+  @media (max-width:700px){
+    .sheet{padding:36px 24px; margin:0}
+    .basis .row{grid-template-columns:1fr; gap:2px}
+    .demo-tag{position:static; display:inline-block; margin-bottom:16px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="demo-tag">示例 · 虚构需求</div>
+
+  <div class="eyebrow">评 审 报 告</div>
+  <h1>订单列表页增加「一键催付」</h1>
+  <div class="meta">
+    <span>提出方：运营中心</span><span>评审：工具态</span><span>版本：第 1 稿</span><span>轮次：第 1 轮</span>
+  </div>
+
+  <div class="verdict">
+    <div class="k">结 论</div>
+    <div class="v">改完再评</div>
+    <p class="sub">方案本身不算错，但它现在还不是一个能拍板的方案。</p>
+    <ol>
+      <li><b>背景没探讨完。</b>通篇只有「效率低」三个字：一天催多少单、每单花几分钟、这 20 单当初为什么没付——一个数都没有。数没有，问题就不成立。</li>
+      <li><b>没算投入产出比。</b>2 人日 ≈ 2000 元，换 3 个人每天省多少分钟、这笔钱值不值、不改会怎样，三笔账一笔都没算。</li>
+      <li><b>业务逻辑和交互细节都是空的。</b>谁能催、多久能催一次、连点两下发几条、发失败了怎么办；按钮放哪、点完看不看得见结果——一条没写。这两块不补，做出来的东西一定返工。</li>
+    </ol>
+  </div>
+
+  <h2>缺 的 那 一 问</h2>
+  <table>
+    <thead><tr><th>五问</th><th>状态</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="q">谁</td><td class="mark ok">✅</td><td>运营专员，3 人。不是「销售」，也不是「用户」</td></tr>
+      <tr><td class="q">什么场景</td><td class="mark ok">✅</td><td>每天约 20 单超时未付，逐个复制单号去微信里问</td></tr>
+      <tr><td class="q">什么问题</td><td class="mark warn">⚠️</td><td>说「效率低」但没算过一天到底花多少分钟。这个数补上，问题才成立</td></tr>
+      <tr><td class="q">有哪些方案</td><td class="mark no">❌</td><td>只有「一键催付」一个。没比过「不做」，也没比过「轻量做」</td></tr>
+      <tr><td class="q">为什么最优</td><td class="mark no">❌</td><td>没有备选，就谈不上最优</td></tr>
+    </tbody>
+  </table>
+  <div class="gap">卡在：第 4 问。</div>
+
+  <h2>依 据</h2>
+  <div class="basis">
+    <div class="row">
+      <div class="k">受益范围</div>
+      <div class="v"><b>调研只覆盖 3 名运营专员，不具备全量代表性。</b>这个结论对「每天手动催 20 单」的那类人成立，换成客服、换成销售、换成其他区域，就未必成立。<em>下结论前要么扩样本，要么把适用范围写死在方案里。</em></div>
+    </div>
+    <div class="row">
+      <div class="k">成本</div>
+      <div class="v"><b>真正要回答的是这句话：如果你是老板，愿意花 2000 元，解决这 3 个人的效率问题吗？</b>2 人日 ≈ 2000 元只是个刻度，值不值要看答案。<em>说「愿意」就做；说「不愿意」，先去找替代方案——脚本、模板、招人，都比做功能便宜。</em></div>
+    </div>
+    <div class="row">
+      <div class="k">顺手额度</div>
+      <div class="v"><b>已经越过 1 人日这条线，属于要论证的需求。</b>不能按「顺手做」放行，也不能靠「反正不大」推进。<em>这条线的作用，是挡住「每个都很小，所以什么都做」。</em></div>
+    </div>
+    <div class="row">
+      <div class="k">边界</div>
+      <div class="v"><b>催付动作和订单状态同源，落在「订单履约」这条水系里，不需要新建一套模型。</b>这一项没问题。<em>如果哪天要做「自动催付策略」，那是另一条水系，得单独论证。</em></div>
+    </div>
+    <div class="row">
+      <div class="k">验证</div>
+      <div class="v"><b>成功标准、埋点、上线通知方式，三项全空。</b>「催付之后付款率涨了多少」没人定义，做完也不知道成没成。<em>埋点事后补不回来，它属于方案阶段的交付物，不是上线后再说的事。</em></div>
+    </div>
+  </div>
+
+  <h2>业 务 逻 辑 · 还 有 六 个 洞</h2>
+  <table>
+    <thead><tr><th style="width:21%">缺口</th><th style="width:15%">现在的说法</th><th>必须补的</th></tr></thead>
+    <tbody>
+      <tr><td><b>谁有权限催</b></td><td class="now">没写</td><td>是「只能催自己名下的单」，还是「全部订单都能催」？跨区域、跨销售的订单呢？权限不定，等于把风险留到上线后</td></tr>
+      <tr><td><b>什么算「超时未付」</b></td><td class="now">没定义</td><td>下单后 24 小时算超时，还是以支付通道的超时为准？部分支付、待审核、已申请退款的单，算不算在这个池子里</td></tr>
+      <tr><td><b>频次与冷却</b></td><td class="now">没写</td><td>同一张单一天最多催几次、两次之间至少隔多久？这个上限谁定——运营主管还是产品</td></tr>
+      <tr><td><b>幂等与并发</b></td><td class="now">没写</td><td>两个人同时点、或一个人连点三次，客户收到一条还是三条？这类问题上线第一天就会发生</td></tr>
+      <tr><td><b>走什么渠道、说什么话</b></td><td class="now">没写</td><td>短信 / 企微 / 站内信，还是都发？模板谁维护、能不能改？客户看到的第一句话是什么——这句话决定他付不付</td></tr>
+      <tr><td><b>失败与回收</b></td><td class="now">没写</td><td>号码无效、被拉黑、通道限流，页面上怎么提示？客户付完之后，这条催付记录怎么关</td></tr>
+    </tbody>
+  </table>
+
+  <h2>交 互 细 节 · 还 有 六 个 洞</h2>
+  <table>
+    <thead><tr><th style="width:21%">位置</th><th style="width:15%">现在的说法</th><th>必须补的</th></tr></thead>
+    <tbody>
+      <tr><td><b>入口放哪</b></td><td class="now">只说「列表页」</td><td>行内操作列，还是勾选后批量操作？单条催和批量催是不是同一套逻辑——不是的话，要做两遍</td></tr>
+      <tr><td><b>按钮形态</b></td><td class="now">没写</td><td>催付是打扰性动作，不该用主按钮；已支付、已取消的订单上，这个按钮该灰掉还是不出现</td></tr>
+      <tr><td><b>二次确认</b></td><td class="now">没写</td><td>点一下直接发，还是弹窗确认？批量时说清「将为 12 张单发送催付」，别让人点完才后悔</td></tr>
+      <tr><td><b>发送中</b></td><td class="now">没写</td><td>按钮转圈、整行置灰，还是允许再点？发送要几秒，这几秒里用户会做什么，得先想好</td></tr>
+      <tr><td><b>结果反馈</b></td><td class="now">没写</td><td>部分成功怎么报——「12 单成功，2 单失败」，失败的是哪两张、能不能一键重发。只弹个 toast 说「操作成功」，等于没说</td></tr>
+      <tr><td><b>催没催过看得见吗</b></td><td class="now">没写</td><td>列表要不要加「最近催付时间 / 次数」列？不加，运营第二天根本想不起来哪张单催过、催了几次</td></tr>
+    </tbody>
+  </table>
+
+  <h2>该 问 的 问 题</h2>
+  <ol class="ask">
+    <li><b>现在一天催多少单、每张单从发现到发出消息要几分钟？</b>没有这个数，「效率低」就只是一句感受。</li>
+    <li><b>除了「一键催付」，还评过哪几个方案？为什么排除？</b>至少要摆出「不做」和「轻量做」（比如一张话术模板 + 一个复制按钮）两个备选。</li>
+    <li><b>如果只能做一半，砍哪一半？</b>答不出这句，说明还没想清楚哪部分是关键。</li>
+    <li><b>催付发出去之后，成没成交，谁回来看？</b>没人回来看，这个功能就没有闭环。</li>
+    <li><b>同一个客户一天最多被催几次？这个上限谁定？</b>这是本套判据里没覆盖的空白，需要业务自己拍，我不替你定。</li>
+  </ol>
+
+  <h2>分 发 清 单</h2>
+  <table class="dispatch">
+    <colgroup><col style="width:20%"><col style="width:38%"><col style="width:26%"><col style="width:16%"></colgroup>
+    <thead><tr><th>对象</th><th>要说什么</th><th>目的</th><th>渠道</th></tr></thead>
+    <tbody>
+      <tr><td>提需求的运营负责人</td><td>缺的不是结论，是备选方案和三个数：单量、每单耗时、当前付款率</td><td>让他自己把第 4 问补上</td><td>需求池评论</td></tr>
+      <tr><td>研发负责人</td><td>先不排期；业务逻辑和交互至少还要再过一稿</td><td>避免占用下个迭代的坑位</td><td>周会</td></tr>
+      <tr><td>客服负责人</td><td>本期不改动，口径先别外传</td><td>防止一线提前按「会催付」答复客户</td><td>群公告</td></tr>
+      <tr><td>决策人</td><td>若运营坚持要做：2000 元 / 3 人受益，这笔钱值不值由他判断</td><td>让该判断的人判断</td><td>单独沟通</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>备注</b><br>
+    属于【引申】的部分：水系边界判断、业务逻辑与交互的 12 个缺口清单、分发渠道建议。<br>
+    本人未给判据、本次按空白处理的部分：催付频次上限、催付后的转化归属。<b>没有编。</b>
+  </div>
+
+  <footer>本页为示例，需求、数据、人名均为虚构 · 产品Ronchi · PM-Ronchi</footer>
+</div>
+</body>
+</html>

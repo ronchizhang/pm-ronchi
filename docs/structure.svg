@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="产品老兵伦奇：五问主链与双入口结构图">
+  <defs>
+    <style>
+      .paper { fill: #FBFAF7; }
+      .ink { fill: #1C2530; }
+      .muted { fill: #6E6A60; }
+      .accent { fill: #B23A2F; }
+      .box { fill: #FFFFFF; stroke: #DAD5C9; stroke-width: 1.5; }
+      .box-hot { fill: #FFFFFF; stroke: #B23A2F; stroke-width: 2; }
+      .t { font-family: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; }
+      .num { font-family: "Helvetica Neue", Arial, sans-serif; }
+      .lbl { font-size: 13px; letter-spacing: 2px; }
+      .q { font-size: 21px; font-weight: 600; }
+      .h { font-size: 17px; font-weight: 600; }
+      .b { font-size: 15px; }
+      .s { font-size: 13px; }
+    </style>
+    <marker id="arw" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A9A296"/>
+    </marker>
+  </defs>
+
+  <rect class="paper" x="0" y="0" width="1200" height="800"/>
+
+  <!-- header -->
+  <text class="t lbl muted" x="46" y="52">判 断 结 构</text>
+  <text class="t" x="46" y="92" font-size="30" font-weight="700" fill="#1C2530">一张结构，四种用法</text>
+  <text class="t s muted" x="47" y="762">同一个五问，评需求 · 找对标 · 评人 · 写文档。缺哪一问就指哪一问，不替对方补。</text>
+
+  <!-- chain -->
+  <g>
+    <rect class="box" x="46" y="120" width="196" height="86" rx="8"/>
+    <text class="t num accent" x="64" y="146" font-size="12">01</text>
+    <text class="t q ink" x="64" y="180">谁</text>
+
+    <rect class="box" x="274" y="120" width="196" height="86" rx="8"/>
+    <text class="t num accent" x="292" y="146" font-size="12">02</text>
+    <text class="t q ink" x="292" y="180">什么场景</text>
+
+    <rect class="box" x="502" y="120" width="196" height="86" rx="8"/>
+    <text class="t num accent" x="520" y="146" font-size="12">03</text>
+    <text class="t q ink" x="520" y="180">什么问题</text>
+
+    <rect class="box-hot" x="730" y="120" width="196" height="86" rx="8"/>
+    <text class="t num accent" x="748" y="146" font-size="12">04</text>
+    <text class="t q ink" x="748" y="180">有哪些方案</text>
+
+    <rect class="box-hot" x="958" y="120" width="196" height="86" rx="8"/>
+    <text class="t num accent" x="976" y="146" font-size="12">05</text>
+    <text class="t q ink" x="976" y="180">为什么最优</text>
+
+    <line x1="242" y1="163" x2="268" y2="163" stroke="#A9A296" stroke-width="1.5" marker-end="url(#arw)"/>
+    <line x1="470" y1="163" x2="496" y2="163" stroke="#A9A296" stroke-width="1.5" marker-end="url(#arw)"/>
+    <line x1="698" y1="163" x2="724" y2="163" stroke="#A9A296" stroke-width="1.5" marker-end="url(#arw)"/>
+    <line x1="926" y1="163" x2="952" y2="163" stroke="#A9A296" stroke-width="1.5" marker-end="url(#arw)"/>
+
+    <text class="t s accent" x="730" y="232">↑ 大部分 PRD 断在这里：只有一个方案，然后论证它最好</text>
+  </g>
+
+  <!-- panels -->
+  <g>
+    <rect class="box" x="46" y="262" width="540" height="330" rx="10"/>
+    <text class="t lbl accent" x="72" y="298">工 具 态 · 评 物</text>
+    <text class="t h ink" x="72" y="330">输入是一份东西</text>
+    <text class="t b muted" x="72" y="362">需求、PRD、方案、表结构、原型、评审记录</text>
+
+    <line x1="72" y1="382" x2="560" y2="382" stroke="#E6E1D5" stroke-width="1"/>
+    <text class="t b ink" x="72" y="410">· 出五问缺位表，指到空着的那一问</text>
+    <text class="t b ink" x="72" y="438">· 算粗账：人日 × 1000 元，再问「老板愿不愿意花」</text>
+    <text class="t b ink" x="72" y="466">· 删节点先问：它在防什么，删了谁承担</text>
+    <text class="t b ink" x="72" y="494">· 交付必带分发清单：通知谁、说什么、什么目的</text>
+
+    <rect x="72" y="520" width="488" height="46" rx="6" fill="#F4F1E9"/>
+    <text class="t s muted" x="88" y="549">输出五段：结论 · 缺的那一问 · 依据 · 该问的问题 · 分发清单</text>
+  </g>
+
+  <g>
+    <rect class="box" x="614" y="262" width="540" height="330" rx="10"/>
+    <text class="t lbl accent" x="640" y="298">教 练 态 · 评 人</text>
+    <text class="t h ink" x="640" y="330">输入是一段过程</text>
+    <text class="t b muted" x="640" y="362">会议纪要、某人的方案 + 现场应对、被推翻后的反应</text>
+
+    <line x1="640" y1="382" x2="1128" y2="382" stroke="#E6E1D5" stroke-width="1"/>
+    <text class="t b ink" x="640" y="410">· 先过姿态门：他在找答案，还是在找支持</text>
+    <text class="t b ink" x="640" y="438">· 再分诊：没想清楚 / 知识盲区 / 图省事</text>
+    <text class="t b ink" x="640" y="466">· 只列差距，不给改法——给了就是在照着你的思维改</text>
+    <text class="t b ink" x="640" y="494">· 人已经崩了：先给一个 30 分钟内能做完的动作</text>
+
+    <rect x="640" y="520" width="488" height="46" rx="6" fill="#F4F1E9"/>
+    <text class="t s muted" x="656" y="549">输出四段：姿态判断 · 分诊 · 差距清单 · 下一步</text>
+  </g>
+
+  <!-- conclusion -->
+  <text class="t lbl muted" x="46" y="636">结 论 只 能 落 在 这 四 个 里</text>
+  <g>
+    <rect x="46" y="652" width="140" height="42" rx="21" fill="#1C2530"/>
+    <text class="t b" x="79" y="679" fill="#FBFAF7">做</text>
+
+    <rect x="198" y="652" width="140" height="42" rx="21" fill="#FFFFFF" stroke="#1C2530" stroke-width="1.5"/>
+    <text class="t b ink" x="231" y="679">不做</text>
+
+    <rect x="350" y="652" width="180" height="42" rx="21" fill="#B23A2F"/>
+    <text class="t b" x="379" y="679" fill="#FFFFFF">改完再评</text>
+
+    <rect x="542" y="652" width="160" height="42" rx="21" fill="#FFFFFF" stroke="#1C2530" stroke-width="1.5"/>
+    <text class="t b ink" x="570" y="679">待验证</text>
+
+    <text class="t s muted" x="726" y="679">不许「看情况」「视需求而定」——那不是结论。</text>
+  </g>
+</svg>

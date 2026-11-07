@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>产品Ronchi · PM-Ronchi · 一个会追问的产品判断结构</title>
+<meta name="description" content="产品Ronchi（PM-Ronchi）：用一套五问结构评审需求、拆解方案漏洞、点评产品经理的思考。开源 agent skill。">
+<style>
+  :root{--paper:#FBFAF7;--ink:#1C2530;--muted:#6E6A60;--line:#E3DED2;--accent:#B23A2F;--soft:#F4F1E9}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",-apple-system,sans-serif;
+    font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px}
+  header{padding:96px 0 24px}
+  .eyebrow{font-size:12px;letter-spacing:5px;color:var(--muted)}
+  h1{font-size:56px;line-height:1.2;margin:18px 0 14px;letter-spacing:-1.5px}
+  .lede{font-size:22px;line-height:1.7;color:#33404F;max-width:760px}
+  .lede b{color:var(--accent)}
+  .meta{margin-top:26px;font-size:13.5px;color:var(--muted)}
+  .meta span{margin-right:18px;padding-right:18px;border-right:1px solid var(--line)}
+  .meta span:last-child{border:0}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-block;padding:11px 22px;border:1px solid var(--ink);border-radius:2px;
+    text-decoration:none;color:var(--ink);font-size:14.5px;transition:.15s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+
+  .figure{margin:56px 0 8px;border:1px solid var(--line);background:#fff}
+  .figure img{display:block;width:100%}
+  .cap{font-size:13px;color:var(--muted);margin-bottom:64px}
+
+  h2{font-size:13px;letter-spacing:3px;color:var(--muted);font-weight:600;margin:0 0 18px}
+  h2::before{content:"";display:inline-block;width:18px;height:2px;background:var(--accent);vertical-align:4px;margin-right:10px}
+  section{padding:26px 0}
+
+  table{width:100%;border-collapse:collapse;font-size:15px;background:#fff}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;letter-spacing:1px;color:var(--muted);background:var(--soft);font-weight:600}
+
+  .shot{border:1px solid var(--line);margin-top:22px}
+  .shot img{display:block;width:100%}
+  .shot a{display:block;padding:12px 16px;font-size:13.5px;color:var(--muted);text-decoration:none;border-top:1px solid var(--line)}
+  .shot a:hover{color:var(--accent)}
+
+  pre{background:#1C2530;color:#EDE9DF;padding:20px 22px;overflow:auto;font-size:13.5px;
+    line-height:1.7;border-radius:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  footer{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 64px;font-size:13px;color:var(--muted)}
+  footer a{color:var(--muted)}
+  @media(max-width:700px){h1{font-size:38px}.lede{font-size:18px}header{padding:56px 0 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">开 源 A G E N T S K I L L</div>
+    <h1>产品Ronchi</h1>
+    <div style="font-size:15px;letter-spacing:2px;color:#6E6A60;margin:-6px 0 16px">PM-Ronchi</div>
+    <p class="lede">它不给你一份更好的 PRD，<b>它把「你没想到的那一问」指出来</b>。</p>
+    <div class="meta">
+      <span>v1.9</span><span>作者 Ronchi</span><span>CC BY-NC 4.0</span><span>零依赖 · Python ≥ 3.8</span>
+    </div>
+    <div class="cta">
+      <a class="btn solid" href="./demo-review.html">看一份示例评审报告</a>
+      <a class="btn" href="#install">怎么装</a>
+      <a class="btn" href="https://github.com/ronchizhang/pm-ronchi">GitHub</a>
+    </div>
+  </header>
+
+  <div class="figure"><img src="./structure.svg" alt="五问主链与工具态/教练态双入口结构图"></div>
+  <div class="cap">一张结构，四种用法：评需求 · 找对标 · 评人 · 写文档。缺哪一问就指哪一问，不替对方补。</div>
+
+  <section>
+    <h2>它 和 「又 一 个 A I 顾 问」 的 区 别</h2>
+    <table>
+      <thead><tr><th style="width:22%"></th><th style="width:39%">通用的 AI 产品顾问</th><th>这一套</th></tr></thead>
+      <tbody>
+        <tr><td>真相来源</td><td>你的提示词、模型的记忆</td><td>摆到桌面上的事实，和缺失的那一问</td></tr>
+        <tr><td>结论</td><td>面面俱到的建议</td><td>一句给死：做 / 不做 / 改完再评 / 待验证</td></tr>
+        <tr><td>方法</td><td>RICE · KANO · AARRR 通用框架</td><td>五问主链 + 15 条硬规则</td></tr>
+        <tr><td>没依据时</td><td>编一个听起来合理的</td><td>标【引申】/【通用】，或者说「这块没给判据」</td></tr>
+        <tr><td>写 PRD</td><td>直接帮你写一版</td><td>拒绝。只报差距，改法留给你自己出</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>输 出 长 什 么 样</h2>
+    <div class="shot">
+      <img src="./shots/hero.png" alt="评审报告示例：结论、五问缺位表">
+      <a href="./demo-review.html">打开完整示例（虚构需求，一轮评审）→</a>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>装 · 把 链 接 丢 给 A I</h2>
+    <p style="font-size:15px;color:#3C4655;margin:0 0 14px">不用敲命令。把仓库链接发给你的 AI 助手，说一句「装这个技能」：</p>
+<pre><code>https://github.com/ronchizhang/pm-ronchi
+</code></pre>
+    <p style="font-size:14.5px;color:var(--muted);margin-top:14px">
+      它会自己放进 <code>~/.workbuddy/skills/pm-ronchi</code>。装完开个新对话，直接说：
+      「用产品Ronchi帮我看这个需求」「评审一下这份 PRD」。
+      要评人就明说「这次评人」——它默认评物。
+    </p>
+  </section>
+
+  <footer>
+    产品Ronchi · pm-ronchi ｜ 采用 CC BY-NC 4.0 授权，商业使用需另行取得许可 ｜
+    <a href="https://github.com/ronchizhang">@ronchizhang</a>
+  </footer>
+</div>
+</body>
+</html>

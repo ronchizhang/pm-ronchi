@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  smoke:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-22.04, python: "3.8" }
+          - { os: ubuntu-latest, python: "3.10" }
+          - { os: ubuntu-latest, python: "3.13" }
+          - { os: macos-latest, python: "3.10" }
+          - { os: windows-latest, python: "3.10" }
+    name: smoke · ${{ matrix.os }} · py${{ matrix.python }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: 推送前体检（五项）
+        run: python tools/preflight.py
+
+      - name: 冒烟测试
+        run: python -m unittest discover -s tests -v
+
+      - name: 示例报告能构建出来（存在性检查）
+        run: python -c "import os,sys; sys.exit(0 if os.path.getsize('docs/demo-review.html') > 1000 else 1)"
