@@ -32,6 +32,15 @@ STATE = os.path.join(ROOT, ".git", "pm-ronchi-approval.json")
 
 # 哪些话算「明确确认」。问状态、沉默、我自己判断，都不算。
 CONFIRM_WORDS = ("可以发", "发吧", "推吧", "发布吧", "没问题", "推上去", "可以推")
+# 极简回复也算，但必须整句等于它——不然「研发那边」这种句子会被误判成批准。
+TERSE_OK = {"发", "推", "好", "行", "可以", "ok", "OK"}
+
+
+def is_confirm(quote):
+    q = (quote or "").strip()
+    if q in TERSE_OK:
+        return True
+    return any(w in q for w in CONFIRM_WORDS)
 
 
 def run(cmd):
@@ -101,9 +110,9 @@ def approve(quote, allow_force=False):
     if not quote:
         print('用法：push_gate.py approve "可以发"', file=sys.stderr)
         return 2
-    if not any(w in quote for w in CONFIRM_WORDS):
+    if not is_confirm(quote):
         print("这句话不算明确确认：%s" % quote, file=sys.stderr)
-        print("「改完了吗」「现在什么状态」都不算；沉默不算；我自己判断不算。", file=sys.stderr)
+        print("整句只有一个「发」「推」「好」也算；「改完了吗」「现在什么状态」不算；沉默不算；我自己判断不算。", file=sys.stderr)
         return 3
     if dirty():
         print("工作区不干净，先提交再来批。推上去的东西你没见过。", file=sys.stderr)
